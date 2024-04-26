@@ -1,0 +1,17 @@
+{
+  "name": "dlouhy_certification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cypress/xpath": "^2.0.3",
+    "cypress": "^13.8.1",
+    "cypress-real-events": "^1.12.0"
+  }
+}
