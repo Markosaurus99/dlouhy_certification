@@ -9,6 +9,7 @@ export class LoginPage {
     this.usernameInput = customElement("[name='username']");
     this.passwordInput = customElement("[name='password']");
     this.loginButton = customElement("button[type='submit']");
+    this.registrationSuccessfull = customElement(".success-message");
     cy.intercept("/tegb/profile").as("profile.api");
     cy.intercept("/tegb/accounts").as("accounts.api");
   }
@@ -31,10 +32,15 @@ export class LoginPage {
     return this;
   }
 
+  registrationSuccessfullIsVisible(){
+    this.registrationSuccessfull.get().should("be.visible")
+    return this
+  }
+
   clickLogin() {
     this.loginButton.get().click();
     cy.wait("@accounts.api");
     cy.wait("@profile.api");
-    return new HomePage;
+    return new HomePage();
   }
 }

@@ -4,6 +4,8 @@ import { LoginPage } from "./login_page";
 export class HeaderSection {
   constructor() {
     this.logoutButton = customElement(".logout-link");
+    this.pageTitle = customElement(".app-title");
+    this.tegBLogo = customElement("img[alt='Tredgate Logo']");
   }
 
   clickLogout() {

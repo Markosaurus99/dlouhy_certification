@@ -3,9 +3,10 @@ import { UserApi } from "../api/tegb/login_api";
 import { LoginPage } from "../page-objects/login_page";
 import { faker } from "@faker-js/faker";
 
-describe("", () => {
-  it("", () => {
+describe("TegB Banking App E2E Test", () => {
+  it("TegB register, create account, login and edit profile", () => {
     let startBalance = 1000;
+    let type = "Test";
     const randomEmail = faker.internet.exampleEmail();
     const randomUsername = faker.internet.userName();
     const randomPassword = faker.internet.password();
@@ -20,7 +21,8 @@ describe("", () => {
       .typeUsername(randomUsername)
       .typePassword(randomPassword)
       .typeEmail(randomEmail)
-      .clickSubmit();
+      .clickSubmit()
+      .registrationSuccessfullIsVisible();
 
     const userApi = new UserApi();
     const accountsApi = new AccountsCreateApi();
@@ -30,7 +32,11 @@ describe("", () => {
       const accessTokenValue = response.body.access_token;
       cy.setCookie("access_token", accessTokenValue);
       cy.get("@user_id").then(() => {
-        accountsApi.createAccount(accessTokenValue, startBalance);
+        accountsApi
+          .createAccount(accessTokenValue, type, startBalance)
+          .then((response) => {
+            expect(response.status).to.eq(201);
+          });
       });
     });
 
@@ -45,6 +51,17 @@ describe("", () => {
       .typeEmail(randomEmail)
       .typePhoneNumber(randomPhoneNumber)
       .typeAge(randomAge)
-      .clickSaveChanges();
+      .clickSaveChanges()
+      .firstNameProfileHasText(randomFirstname)
+      .lastNameProfileHasText(randomLastname)
+      .emailProfileHasText(randomEmail)
+      .telephoneProfileHasText(randomPhoneNumber)
+      .ageProfileHasText(randomAge)
+      .accountNumberIsVisible()
+      .accountBalanceIsVisible()
+      .accountTypeIsVisible()
+      .accountBalanceHasText(startBalance)
+      .accountTypeHasText(type)
+      .clickLogout();
   });
 });

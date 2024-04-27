@@ -1,5 +1,5 @@
 export class AccountsCreateApi {
-  createAccount(accesstoken, startBalance) {
+  createAccount(accesstoken, type, startBalance) {
     return cy.request({
       method: "POST",
       url: Cypress.env("tegb_banking_api_url") + "/tegb/accounts/create",
@@ -8,7 +8,7 @@ export class AccountsCreateApi {
       },
       body: {
         startBalance: startBalance,
-        type: "Test",
+        type: type,
       },
     });
   }
