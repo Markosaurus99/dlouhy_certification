@@ -1,3 +1,4 @@
+import { EditProfileModal } from "../page-objects/edit_profile_modal";
 import { HomePage } from "../page-objects/home_page";
 import { LoginPage } from "../page-objects/login_page";
 import { MenuSection } from "../page-objects/menu_section";
@@ -89,7 +90,11 @@ describe("Users page atomic tests", { testIsolation: false }, () => {
     it("Edit profile button has text", () => {
       new HomePage().editProfileButton.hasText("Upravit profil");
     });
-
+    it("Click edit profile, form and cancel changes button is visible", () => {
+      new HomePage().clickEditProfile().editProfileForm.isVisible();
+      new EditProfileModal().cancelChangesButton.isVisible();
+      new EditProfileModal().clickCancelChangesButton();
+    });
     it("Add account button is visible", () => {
       new HomePage().addAccountButton.isVisible();
     });

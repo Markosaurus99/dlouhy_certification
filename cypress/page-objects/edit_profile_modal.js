@@ -9,6 +9,14 @@ export class EditProfileModal {
     this.phoneNumberInput = customElement("[data-testid='chage-phone-input']");
     this.ageInput = customElement("[data-testid='chage-age-input']");
     this.saveChangesButton = customElement("button[type='submit']");
+    this.editProfileForm = customElement(".account-summary");
+    this.cancelChangesButton = customElement(
+      "[data-testid='toggle-edit-profile-button']"
+    );
+  }
+
+  clickCancelChangesButton() {
+    this.cancelChangesButton.get().click();
   }
 
   typeFirstname(firstname) {
