@@ -3,7 +3,7 @@ import { UserApi } from "../api/tegb/login_api";
 import { LoginPage } from "../page-objects/login_page";
 import { faker } from "@faker-js/faker";
 
-describe("TegB Banking App E2E Test", () => {
+describe("TegB Banking App E2E Test", { tags: "@smoke" }, () => {
   it("TegB register, create account, login and edit profile", () => {
     let startBalance = 1000;
     let type = "Test";

@@ -7,12 +7,13 @@ module.exports = defineConfig({
   },
   e2e: {
     setupNodeEvents(on, config) {
+      require("@cypress/grep/src/plugin")(config);
+      return config;
       // implement node event listeners here
     },
     watchForFileChanges: false,
     defaultCommandTimeout: 5000,
     requestTimeout: 15000,
     pageLoadTimeout: 60000,
-    baseUrl: "https://tredgate.com/pmtool/",
   },
 });

@@ -15,25 +15,7 @@ describe("Users page atomic tests", { testIsolation: false }, () => {
       .typeLoginPassword(Cypress.env("tegb_password"))
       .clickLogin();
   });
-  context("Header section tests", () => {
-    it("Page title is visible", () => {
-      new HomePage().pageTitle.isVisible();
-    });
-    it("Page title has text", () => {
-      new HomePage().pageTitle.hasText("TEG#B Dashboard");
-    });
-    it("TegB logo is visible", () => {
-      new HomePage().tegBLogo.isVisible();
-    });
 
-    it("Logout button is visible", () => {
-      new HomePage().logoutButton.isVisible();
-    });
-
-    it("Logout button has text", () => {
-      new HomePage().logoutButton.hasText("Odhlásit se");
-    });
-  });
   context("Menu tests", () => {
     it("Home button is visible", () => {
       new MenuSection().homeButton.isVisible();
@@ -102,6 +84,7 @@ describe("Users page atomic tests", { testIsolation: false }, () => {
     it("Add account button has text", () => {
       new HomePage().addAccountButton.hasText("Přidat účet");
     });
+    // Až by bylo dodělané, přidal bych test na funkčnost buttonu "Add account", totéž u buttonů z menu
 
     it("Account number heading is visible", () => {
       new HomePage().accountNumberHeading.isVisible();
@@ -164,6 +147,29 @@ describe("Users page atomic tests", { testIsolation: false }, () => {
 
     it("Age column has text", () => {
       new HomePage().ageColumn.hasText("Věk:");
+    });
+  });
+  context("Header section tests", () => {
+    it("Page title is visible", () => {
+      new HomePage().pageTitle.isVisible();
+    });
+    it("Page title has text", () => {
+      new HomePage().pageTitle.hasText("TEG#B Dashboard");
+    });
+    it("TegB logo is visible", () => {
+      new HomePage().tegBLogo.isVisible();
+    });
+
+    it("Logout button is visible", () => {
+      new HomePage().logoutButton.isVisible();
+    });
+
+    it("Logout button has text", () => {
+      new HomePage().logoutButton.hasText("Odhlásit se");
+    });
+
+    it("Click logout button, login form is visible", () => {
+      new HomePage().clickLogout().loginForm.isVisible();
     });
   });
 });

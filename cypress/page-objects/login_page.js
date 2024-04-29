@@ -10,6 +10,7 @@ export class LoginPage {
     this.passwordInput = customElement("[name='password']");
     this.loginButton = customElement("button[type='submit']");
     this.registrationSuccessfull = customElement(".success-message");
+    this.loginForm = customElement("form[data-testid='login-form']");
     cy.intercept("/tegb/profile").as("profile.api");
     cy.intercept("/tegb/accounts").as("accounts.api");
   }
