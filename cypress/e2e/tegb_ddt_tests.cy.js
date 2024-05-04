@@ -5,20 +5,26 @@ import { faker } from "@faker-js/faker";
 import accountBalanceData from "../fixtures/account_balance_data.json";
 
 describe("TegB Banking app DDT Tests", () => {
+  let randomEmail;
+  let randomUsername;
+  let randomPassword;
+
+  beforeEach(() => {
+    randomEmail = faker.internet.exampleEmail();
+    randomUsername = faker.internet.userName();
+    randomPassword = faker.internet.password();
+    new LoginPage()
+      .openTegB()
+      .clickRegister()
+      .typeUsername(randomUsername)
+      .typePassword(randomPassword)
+      .typeEmail(randomEmail)
+      .clickSubmit();
+  });
   accountBalanceData.forEach((accountData) => {
-    it(`Account balance: ${accountData.startBalance}`, () => {
+    it(`DDT test for account balance: ${accountData.startBalance}`, () => {
       let type = "Test";
       const startBalance = accountData.startBalance;
-      const randomEmail = faker.internet.exampleEmail();
-      const randomUsername = faker.internet.userName();
-      const randomPassword = faker.internet.password();
-      new LoginPage()
-        .openTegB()
-        .clickRegister()
-        .typeUsername(randomUsername)
-        .typePassword(randomPassword)
-        .typeEmail(randomEmail)
-        .clickSubmit();
       const userApi = new UserApi();
       const accountsApi = new AccountsCreateApi();
       userApi.login(randomUsername, randomPassword).as("user_id");

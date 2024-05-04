@@ -1,14 +1,24 @@
 import { UserApi } from "../../api/tegb/login_api";
+import { LoginPage } from "../../page-objects/login_page";
+import { faker } from "@faker-js/faker";
 
 describe("Send API with Objects", () => {
   let username;
   let password;
-
+  
   beforeEach(() => {
-    username = Cypress.env("tegb_username");
-    password = Cypress.env("tegb_password");
-    cy.log(username);
-    cy.visit(Cypress.env("tegb_banking_url"));
+    const randomEmail = faker.internet.exampleEmail();
+    username = faker.internet.userName();
+    password = faker.internet.password();
+
+    new LoginPage()
+      .openTegB()
+      .clickRegister()
+      .typeUsername(username)
+      .typePassword(password)
+      .typeEmail(randomEmail)
+      .clickSubmit();
+
   });
 
   it("API Login to TEGB", () => {

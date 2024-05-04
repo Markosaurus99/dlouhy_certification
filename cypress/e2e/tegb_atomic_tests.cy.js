@@ -2,6 +2,7 @@ import { EditProfileModal } from "../page-objects/edit_profile_modal";
 import { HomePage } from "../page-objects/home_page";
 import { LoginPage } from "../page-objects/login_page";
 import { MenuSection } from "../page-objects/menu_section";
+import { faker } from "@faker-js/faker";
 
 describe("Users page atomic tests", { testIsolation: false }, () => {
   before(() => {
@@ -9,10 +10,19 @@ describe("Users page atomic tests", { testIsolation: false }, () => {
     cy.clearAllLocalStorage();
     cy.clearAllSessionStorage();
 
+    const randomEmail = faker.internet.exampleEmail();
+    const randomUsername = faker.internet.userName();
+    const randomPassword = faker.internet.password();
+
     new LoginPage()
       .openTegB()
-      .typeLoginUsername(Cypress.env("tegb_username"))
-      .typeLoginPassword(Cypress.env("tegb_password"))
+      .clickRegister()
+      .typeUsername(randomUsername)
+      .typePassword(randomPassword)
+      .typeEmail(randomEmail)
+      .clickSubmit()
+      .typeLoginUsername(randomUsername)
+      .typeLoginPassword(randomPassword)
       .clickLogin();
   });
 
